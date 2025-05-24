@@ -1,0 +1,168 @@
+/*
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS file within this directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the top of the
+* compiled file, but it's generally better to create a new file per style scope.
+*
+*= require bootstrap
+*= require grails
+*= require main
+*= require mobile
+*= require_self
+*/
+*{
+    font-family: 'Dongle', sans-serif;
+}
+
+.navbar{
+    background-color: #F5F7FA !important;
+    min-height: 10vh;
+}
+
+
+#SavingsSub{
+    font-size: 30px;
+    color: #B1B1B1;
+    padding: 0px;
+}
+
+#HomeSub{
+    font-size: 30px;
+    color: #B1B1B1;
+    padding: 0px;
+}
+
+
+#ExpenseSub{
+    font-size: 30px;
+    color: #B1B1B1;
+    padding: 0px;
+}
+
+#LogSub{
+    font-size: 30px;
+    color: #B1B1B1;
+    padding: 0px;
+}
+
+
+.sidebar-link:hover{
+    text-shadow: none !important;
+    background-color: #F5F7FA !important;
+}
+
+#navBarLogo{
+    font-family: "Archivo Black", sans-serif;
+    font-size: 35px;
+    color: #343C6A !important;
+}
+
+#moduleName{
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 30px;
+    color: #343C6A !important;
+}
+
+.swiper-container {
+    width: 80vw;
+    margin: auto;
+    overflow: hidden;
+}
+
+.swiper-wrapper {
+    display: flex; 
+}
+
+.swiper-slide {
+    width: 25vw !important; 
+    flex-shrink: 0; 
+}
+
+.swiper-slide:hover {
+    opacity: 0.90;
+}
+
+.form-text {
+    font-size: 20px !important;
+}
+
+.form-input {
+    border-radius: 5px !important;
+    width: 100%; 
+    font-size: 20px !important;
+    color: black !important;
+}
+
+#addAccountButton:hover {
+    background-color: #4675F4 !important;
+}
+
+#addExpenseButton:hover {
+    background-color: #B05C31 !important;
+}
+
+.sidebar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 11vh; 
+    padding: 0 15px;
+}
+
+.dropdown-toggle::after {
+    display: none !important; 
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+}
+
+#login {
+    background: linear-gradient(-45deg, #204158, #4893c9, #3B706D, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    margin-top: 15vh !important;
+    margin-bottom: 15vh !important;
+}
+
+.inner, .fheader {
+    font-size: 20px !important;
+    
+}
+
+
+#submit {
+    width: 10%;
+    margin: 0% !important;
+    align-self: center !important;
+    background-color: #2D60FF;
+    color: white;
+    position: absolute;
+    right: 44.5vw;
+    top: 60vh;
+}
+
+#submit:hover {
+    background-color: #4d78fc;
+}
+
+
+
+
