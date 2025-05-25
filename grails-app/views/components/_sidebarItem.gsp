@@ -20,7 +20,8 @@
     let ${sidebarItem}Icon = document.getElementById(`${sidebarItem}Icon`);
     let ${sidebarItem}Sub = document.getElementById(`${sidebarItem}Sub`);
 
-    if(`${sidebarItem}`.toLowerCase() == window.location.pathname.split("/").filter(Boolean)[0].toLowerCase()){
+    //if(`${sidebarItem}`.toLowerCase() != window.location.pathname.split("/").filter(Boolean)[0].toLowerCase()){ //for localhost
+    if(`${sidebarItem}`.toLowerCase() == window.location.pathname.split("/").filter(Boolean)[1].toLowerCase()){ // for cloud
       ${sidebarItem}Icon.src=`${assetPath(src: srcPath1)}`
       ${sidebarItem}Sub.style.color='#2D60FF'
       ${sidebarItem}Item.style.borderLeft='5px solid #2D60FF';
@@ -35,7 +36,8 @@
         ${sidebarItem}Item.style.borderLeft='5px solid #2D60FF';
     });
     ${sidebarItem}Item.addEventListener('mouseout', function() {
-        if(`${sidebarItem}`.toLowerCase() != window.location.pathname.split("/").filter(Boolean)[0].toLowerCase()){
+        //if(`${sidebarItem}`.toLowerCase() != window.location.pathname.split("/").filter(Boolean)[0].toLowerCase()){ //for localhost
+        if(`${sidebarItem}`.toLowerCase() != window.location.pathname.split("/").filter(Boolean)[1].toLowerCase()){ // for cloud
           ${sidebarItem}Icon.src=`${assetPath(src: srcPath)}`
           ${sidebarItem}Sub.style.color='#B1B1B1'
           ${sidebarItem}Item.style.border='none';

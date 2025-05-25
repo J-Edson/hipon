@@ -27,19 +27,23 @@
 <body>
     <%
     def currentUri = request.forwardURI
+    def appName = grailsApplication.config.getProperty('info.app.name')
     %>
-    <g:if test="${currentUri == '/login/auth'}">
-        <g:layoutBody/>
+    <g:if test="${currentUri == '/'+appName+'/login/auth'}">
+        <div class="d-none d-lg-block">
+            <g:layoutBody/>
+        </div>
     </g:if>
     <g:else>
-        <g:render template="/components/navbar"/>
-        <div class="row" >
-
-            <div class="col-2">
-                <g:render template="/components/sidebar"/>
-            </div>
-            <div class="col">
-                <g:layoutBody/>
+        <div class="d-none d-lg-block">
+            <g:render template="/components/navbar"/>
+            <div class="row" >
+                <div class="col-2">
+                    <g:render template="/components/sidebar"/>
+                </div>
+                <div class="col">
+                    <g:layoutBody/>
+                </div>
             </div>
         </div>
     </g:else>

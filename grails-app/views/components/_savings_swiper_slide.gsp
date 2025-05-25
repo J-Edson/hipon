@@ -1,5 +1,5 @@
 
-                            <div class="swiper-slide">
+                            <div class="swiper-slide" onclick="window.location.href='${createLink(action: 'show', id:activeSavings.id)}';">
                                 <div class="row justify-content-center">
                                     <div class="col-9 mx-3 text-white " style="background-image: linear-gradient(to bottom right, #4675F4, #0A42DA); border-radius: 20px;">
                                         <div class="row pt-4 justify-content-center">

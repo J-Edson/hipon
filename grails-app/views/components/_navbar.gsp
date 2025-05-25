@@ -1,5 +1,5 @@
 <div class="sticky-top" style="background-color: white;">
-    <div class="row p-4 align-items-center">
+    <div class="row align-items-center">
         <div class="col-2 text-center">
             <g:link controller="home" action="index" style="text-decoration: none;"><div id="navBarLogo"><img id="applicationLogo" src='${assetPath(src: "applicationLogo.svg")}'/> Hipon.</div></g:link>
         </div>

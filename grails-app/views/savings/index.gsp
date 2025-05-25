@@ -16,26 +16,20 @@
                         </g:if>
                         <g:elseif test="${savingsActiveList.size() == 1}">
                             <g:each var="activeSavings" in="${savingsActiveList}">
-                                <g:link action="show" id="${activeSavings.id}" style="text-decoration: none;">
                                     <g:render template="/components/savings_swiper_slide" model="${['activeSavings': activeSavings]}"/>
-                                </g:link>
                             </g:each>
                             <g:render template="/components/savings_swiper_slide"/>
                             <g:render template="/components/savings_swiper_slide"/>
                         </g:elseif>
                         <g:elseif test="${savingsActiveList.size() == 2}">
                             <g:each var="activeSavings" in="${savingsActiveList}">
-                                <g:link action="show" id="${activeSavings.id}" style="text-decoration: none;">
                                     <g:render template="/components/savings_swiper_slide" model="${['activeSavings': activeSavings]}"/>
-                                </g:link>
                             </g:each>
                             <g:render template="/components/savings_swiper_slide"/>
                         </g:elseif>
                         <g:else>
                             <g:each var="activeSavings" in="${savingsActiveList}">
-                                <g:link action="show" id="${activeSavings.id}" style="text-decoration: none;">
                                     <g:render template="/components/savings_swiper_slide" model="${['activeSavings': activeSavings]}"/>
-                                </g:link>
                             </g:each>
                         </g:else>
                     </div>

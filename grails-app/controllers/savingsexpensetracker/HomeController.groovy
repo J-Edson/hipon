@@ -35,7 +35,6 @@ class HomeController {
             totalExpense += expense.txnAmt
         }
         //weekly activity chart
-        def sdf = new SimpleDateFormat('EEEE')
         def dateToday = LocalDate.now(ZoneId.of("Asia/Manila"))
         def sql = new Sql(dataSource)
         def query = ""
@@ -43,24 +42,14 @@ class HomeController {
         println recordTypeList
         for(int x = 6; x >= 0; x--){
             def dataDate = dateToday.minusDays(x)
-            query = "SELECT to_char(A.log_date::date, 'Day') AS record_date, SUM(CASE WHEN record_type_id = "+recordTypeList[6].id+" THEN txn_amt ELSE 0 END) - SUM(CASE WHEN record_type_id = "+recordTypeList[7].id+" THEN txn_amt ELSE 0 END) AS total_expense FROM record A WHERE A.client_id = "+userInstance.id+" AND  A.log_date::date = '" + dataDate + "' AND A.record_type_id in ("+recordTypeList[6].id+", "+recordTypeList[7].id+") GROUP BY A.log_date::date"
+            query = "SELECT to_char('" + dataDate + "'::date, 'Day') AS record_date, COALESCE((SELECT SUM(CASE WHEN record_type_id = "+recordTypeList[6].id+" THEN txn_amt ELSE 0 END) - SUM(CASE WHEN record_type_id = "+recordTypeList[7].id+" THEN txn_amt ELSE 0 END) AS total_expense FROM record A WHERE A.client_id = "+userInstance.id+" AND  A.log_date::date = '" + dataDate + "' AND A.record_type_id in ("+recordTypeList[6].id+", "+recordTypeList[7].id+") GROUP BY A.log_date::date),0) AS total_expense"
             def activity = sql.rows(query)
             def dailyActivity = [];
-            if(!activity){
-                dailyActivity[0] = sdf.format(Date.from(dataDate.atStartOfDay(ZoneId.of("Asia/Manila")).toInstant()))
-                dailyActivity[2] = 0
-            }else{
-                dailyActivity[0] = activity.record_date[0]
-                dailyActivity[2] = activity.total_expense[0] 
-            }
-            query = "SELECT to_char(A.log_date::date, 'Day') AS record_date, SUM(CASE WHEN record_type_id in ("+recordTypeList[0].id+", "+recordTypeList[2].id+") THEN txn_amt ELSE 0 END) - SUM(CASE WHEN record_type_id in ("+recordTypeList[1].id+", "+recordTypeList[3].id+") THEN txn_amt ELSE 0 END) AS total_savings FROM record A WHERE A.client_id = "+userInstance.id+" AND  A.log_date::date = '" + dataDate + "' AND A.record_type_id in ("+recordTypeList[0].id+", "+recordTypeList[2].id+", "+recordTypeList[1].id+", "+recordTypeList[3].id+") GROUP BY A.log_date::date"
+            dailyActivity[0] = activity.record_date[0]
+            dailyActivity[2] = activity.total_expense[0] 
+            query = "SELECT to_char('" + dataDate + "'::date, 'Day') AS record_date,COALESCE((SELECT SUM(CASE WHEN record_type_id in ("+recordTypeList[0].id+", "+recordTypeList[2].id+") THEN txn_amt ELSE 0 END) - SUM(CASE WHEN record_type_id in ("+recordTypeList[1].id+", "+recordTypeList[3].id+") THEN txn_amt ELSE 0 END) AS total_savings FROM record A WHERE A.client_id = "+userInstance.id+" AND  A.log_date::date = '" + dataDate + "' AND A.record_type_id in ("+recordTypeList[0].id+", "+recordTypeList[2].id+", "+recordTypeList[1].id+", "+recordTypeList[3].id+") GROUP BY A.log_date::date),0) AS total_savings"
             activity = sql.rows(query)
-            if(!activity){
-                dailyActivity[1] = 0
-            }else{
-                dailyActivity[1] = activity.total_savings[0]
-            }
-
+            dailyActivity[1] = activity.total_savings[0]
             weeklyActivity.add(dailyActivity)
         }
         weeklyActivity = weeklyActivity as JSON
