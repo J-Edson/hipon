@@ -6,6 +6,7 @@ import user.PersonAuthority
 import category.Status
 import log.RecordType
 import expense.ExpenseCategory
+import savings.InterestFrequency
 
 import grails.gorm.transactions.Transactional
 
@@ -16,6 +17,7 @@ class BootStrap {
         addInitialStatus()
         addInitialRecordType()
         addInitialExpenseCategory()
+        addInitialInterestFrequency()
     }
     def destroy = {
     }
@@ -29,12 +31,20 @@ class BootStrap {
             adminUser = new Person(username: 'admin', password: 'admin').save()
             PersonAuthority.create adminUser, adminRole
         }
-
         PersonAuthority.withSession {
             it.flush()
             it.clear()
         }
 
+        def adminUser1 = Person.findByUsername('user1')
+        if(!adminUser1){
+            adminUser = new Person(username: 'user1', password: 'user1').save()
+            PersonAuthority.create adminUser, adminRole
+        }
+        PersonAuthority.withSession {
+            it.flush()
+            it.clear()
+        }
     }
 
     @Transactional
@@ -78,6 +88,21 @@ class BootStrap {
             def newCategory = ExpenseCategory.findByName(name)
             if(!newCategory){
                 newCategory = new ExpenseCategory(name: name, code: code).save()
+            }
+        }
+    }
+
+    @Transactional
+    void addInitialInterestFrequency() {
+        def frequencyList = ["0-N/A", "1-Daily", "2-Monthly", "3-Annually"]
+
+        frequencyList.each { freq ->
+            String[] frequency = freq.split("-");
+            def code = Integer.parseInt(frequency[0])
+            def name = frequency[1]
+            def newFrequency = InterestFrequency.findByName(name)
+            if(!newFrequency){
+                newFrequency = new InterestFrequency(name: name, code: code).save()
             }
         }
     }

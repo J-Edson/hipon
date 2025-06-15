@@ -25,4 +25,8 @@ class Record {
         debit nullable: true
         expense nullable: true
     }
+
+    static mapping = {
+        id sqlType:'smallint', generator:'increment'
+    }
 }

@@ -28,6 +28,7 @@ class Person implements Serializable {
     }
 
     static mapping = {
+        id sqlType:'smallint', generator:'increment'
 	    password column: '`password`'
     }
 }

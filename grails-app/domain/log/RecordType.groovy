@@ -7,4 +7,8 @@ class RecordType {
 
     static constraints = {
     }
+
+    static mapping = {
+        id sqlType:'smallint', generator:'increment'
+    }
 }

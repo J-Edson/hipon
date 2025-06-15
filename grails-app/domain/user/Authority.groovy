@@ -18,6 +18,7 @@ class Authority implements Serializable {
 	}
 
 	static mapping = {
+		id sqlType:'smallint', generator:'increment'
 		cache true
 	}
 }

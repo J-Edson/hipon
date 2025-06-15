@@ -81,6 +81,7 @@ class PersonAuthority implements Serializable {
 	}
 
 	static mapping = {
+		id sqlType:'smallint', generator:'increment'
 		id composite: ['person', 'authority']
 		version false
 	}

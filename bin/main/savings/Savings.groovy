@@ -16,4 +16,8 @@ class Savings {
         acctNo nullable: true
         expiryDate nullable: true
     }
+
+    static mapping = {
+        id sqlType:'smallint', generator:'increment'
+    }
 }
