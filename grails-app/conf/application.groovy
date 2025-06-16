@@ -4,6 +4,12 @@
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'user.Person'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'user.PersonAuthority'
 grails.plugin.springsecurity.authority.className = 'user.Authority'
+grails.plugin.springsecurity.useSessionFixationPrevention = true
+grails.plugin.springsecurity.logout.invalidateHttpSession = true
+grails.plugin.springsecurity.sessionFixationPrevention.alwaysCreateSession = true
+grails.plugin.springsecurity.logout.clearAuthentication = true
+grails.plugin.springsecurity.logout.redirectUrl = '/login/auth'
+
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	[pattern: '/',               access: ['permitAll']],
 	[pattern: '/error',          access: ['permitAll']],

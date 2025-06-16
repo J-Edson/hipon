@@ -2,6 +2,7 @@ package savingsexpensetracker
 
 import grails.gorm.transactions.Transactional
 import grails.plugin.springsecurity.annotation.Secured
+import grails.plugin.springsecurity.SpringSecurityService
 import groovy.sql.Sql
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -19,10 +20,12 @@ class SavingsController {
 
     private statusList = Status.listOrderByCode()
     private recordTypeList = RecordType.listOrderByCode()
-    private userInstance = getAuthenticatedUser()
+
     def dataSource
+    def springSecurityService
 
     def index () {
+        def userInstance = springSecurityService.getCurrentUser()
         def savingsList = Savings.list()
         def savingsActiveList = Savings.findAllByClientAndStatus(userInstance, statusList[0])
         def totalBalance = 0
@@ -52,6 +55,7 @@ class SavingsController {
     }
 
     def show (Long id) {
+        def userInstance = springSecurityService.getCurrentUser()
         def savingsInstance = Savings.get(id)
         if(userInstance.id != savingsInstance.client.id){
             redirect(action: "index")
@@ -119,6 +123,7 @@ class SavingsController {
     @Transactional
     def save () {
         println "params " + params
+        def userInstance = springSecurityService.getCurrentUser()
         def savingsInstance = new Savings(
             client: userInstance,
             acctName: params.acctName,
@@ -159,6 +164,7 @@ class SavingsController {
     @Transactional
     def delete () {
         println "params " + params
+        def userInstance = springSecurityService.getCurrentUser()
         def savingsInstance = Savings.get(params.id)
         if(userInstance.id != savingsInstance.client.id){
             redirect(action: "index")
@@ -181,6 +187,7 @@ class SavingsController {
     @Transactional
     def updateBalance (Long id) {
         println "%param%" + params
+        def userInstance = springSecurityService.getCurrentUser()
         def savingsInstance = Savings.get(id)
         if(userInstance.id != savingsInstance.client.id){
             redirect(action: "index")
@@ -224,6 +231,7 @@ class SavingsController {
     @Transactional
     def transferBalance (Long id) {
         println "%transferBalanceParams% " + params
+        def userInstance = springSecurityService.getCurrentUser()
         def creditSavings = Savings.get(id)
         if(userInstance.id != creditSavings.client.id){
             redirect(action: "index")
@@ -263,6 +271,7 @@ class SavingsController {
     @Transactional
     def configureInterest () {
         println "%configureInterest% " + params
+        def userInstance = springSecurityService.getCurrentUser()
         def savingsInstance = Savings.get(params.id)
         if(userInstance.id != savingsInstance.client.id){
             redirect(action: "index")

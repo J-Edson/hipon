@@ -1,6 +1,7 @@
 package savingsexpensetracker
 
 import grails.plugin.springsecurity.annotation.Secured
+import grails.plugin.springsecurity.SpringSecurityService
 
 import groovy.sql.Sql
 import java.time.LocalDate
@@ -16,13 +17,14 @@ import expense.*
 @Secured('ROLE_ADMIN')
 class HomeController {
 
+    def dataSource
+    def springSecurityService
     private statusList = Status.listOrderByCode()
     private recordTypeList = RecordType.listOrderByCode()
     private expenseCategoryList = ExpenseCategory.listOrderByCode()
-    private userInstance = getAuthenticatedUser()
-    def dataSource
 
     def index() { 
+        def userInstance = springSecurityService.getCurrentUser()
         def savingsActiveList = Savings.findAllByClientAndStatus(userInstance, statusList[0])
         def totalBalance = 0.00D
         for (savings in savingsActiveList) {
