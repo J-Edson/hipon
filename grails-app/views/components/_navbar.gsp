@@ -8,12 +8,6 @@
         </div>
         <div class="col-2 text-end pr-5">
             <div class="row align-items-center">
-                <div class="col d-none">
-                    <img id="settingsIcon" src='${assetPath(src: "settings_icon.svg")}'/>
-                </div>
-                <div class="col d-none">
-                    <img id="notifIcon" src='${assetPath(src: "notif_icon.svg")}'/>
-                </div>
                 <div class="col">
                     <div class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img id="profileLogo" src='${assetPath(src: "profileLogo.svg")}'/>

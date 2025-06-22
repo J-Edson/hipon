@@ -86,6 +86,7 @@
 
 .swiper-slide:hover {
     opacity: 0.90;
+    cursor: pointer;
 }
 
 .form-text {

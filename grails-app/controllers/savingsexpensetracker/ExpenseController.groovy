@@ -2,6 +2,7 @@ package savingsexpensetracker
 
 import grails.gorm.transactions.Transactional
 import grails.plugin.springsecurity.annotation.Secured
+import grails.plugin.springsecurity.SpringSecurityService
 import groovy.sql.Sql
 import java.time.LocalDate
 import java.time.ZoneId
@@ -16,13 +17,14 @@ import expense.*
 @Secured('ROLE_ADMIN')
 class ExpenseController {
 
-    private userInstance = getAuthenticatedUser()
     private statusList = Status.listOrderByCode()
     private recordTypeList = RecordType.listOrderByCode()
     def dataSource
+    def springSecurityService
 
 
     def index() {
+        def userInstance = springSecurityService.getCurrentUser()
         def expenseList = Expense.findAllByClient(userInstance, [sort: "id", order: "desc"])
         println statusList
         def savingsList = Savings.findAllByClientAndStatus(userInstance, statusList[0])
@@ -58,6 +60,7 @@ class ExpenseController {
     @Transactional
     def save () {
         println "%%params%% " + params
+        def userInstance = springSecurityService.getCurrentUser()
         def creditAcct = Savings.get(params.creditAcctID)
         def txnAmt = params.txnAmt.toDouble()
         if(creditAcct.balance >= txnAmt){
@@ -93,6 +96,7 @@ class ExpenseController {
     @Transactional
     def reverse(){
         println "params " + params
+        def userInstance = springSecurityService.getCurrentUser()
         def expenseInstance = Expense.get(params.id)
         def savingsInstance = expenseInstance?.creditSavings
         def txnAmt = expenseInstance.txnAmt

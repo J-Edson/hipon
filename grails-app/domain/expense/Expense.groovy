@@ -15,4 +15,8 @@ class Expense {
     
     static constraints = {
     }
+
+    static mapping = {
+        id sqlType:'smallint', generator:'increment'
+    }
 }

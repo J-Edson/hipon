@@ -5,7 +5,7 @@
     <title>Savings Expense Tracker</title>
 </head>
 <body>
-<div class="row" >
+<div class="row">
     <div class="col-8 py-5" style="background-color: #F5F7FA;"> 
         <div class="row" >
             <div class="col-12">
@@ -15,14 +15,16 @@
                             <div class="col-3">
                                 <div><img id="savingsArrowIcon" src='${assetPath(src: "savings_arrow_icon.svg")}'/></div>
                             </div>
-                            <div class="col-6 text-start">
-                                <div style="font-family: 'Inter', sans-serif;font-optical-sizing: auto;font-weight: 600;font-style: normal;">Total Savings</div> 
+                            <div class="col-9 text-start">
+                                <div class="row text-center align-items-center" >
+                                    <div class="col-9 text-start" style="font-family: 'Inter', sans-serif;font-optical-sizing: auto;font-weight: 600;font-style: normal;">Total Savings</div>
+                                    <div class="col-2 align-self-end" style="color: #41D4A8; background-color: #FFFFFF; border-radius: 5px; font-family: 'Inter', sans-serif;font-optical-sizing: auto;font-weight: 500;font-style: normal;">
+                                        %
+                                    </div>
+                                </div>  
                                 <div style="font-family: 'Inter', sans-serif;font-optical-sizing: auto;font-weight: 700;font-style: normal;font-size: 35px;">
                                     &#x20B1;<g:formatNumber number="${totalBalance}" format="#,##0.00" />
                                 </div>
-                            </div>
-                            <div class="col-2 align-self-end" style="color: #41D4A8; background-color: #FFFFFF; border-radius: 5px; font-family: 'Inter', sans-serif;font-optical-sizing: auto;font-weight: 500;font-style: normal;">
-                                %
                             </div>
                         </div>
                     </div>
@@ -31,14 +33,16 @@
                             <div class="col-3">
                                 <img id="expenseArrowIcon" src='${assetPath(src: "expense_arrow_icon.svg")}'/>
                             </div>
-                            <div class="col-6 text-start">
-                                <div style="font-family: 'Inter', sans-serif;font-optical-sizing: auto;font-weight: 600;font-style: normal;color: #FFFFFF">Total Expense</div> 
+                            <div class="col-9 text-start">
+                                <div class="row text-center align-items-center" >
+                                    <div class="col-9 text-start" style="font-family: 'Inter', sans-serif;font-optical-sizing: auto;font-weight: 600;font-style: normal;color: #FFFFFF">Total Expense</div> 
+                                    <div class="col-2 align-self-end" style="color: red; background-color: #FFFFFF; border-radius: 5px; font-family: 'Inter', sans-serif;font-optical-sizing: auto;font-weight: 500;font-style: normal;">
+                                        %
+                                    </div>
+                                </div>
                                 <div style="font-family: 'Inter', sans-serif;font-optical-sizing: auto;font-weight: 700;font-style: normal;font-size: 35px;color: #FFFFFF">
                                     &#x20B1;<g:formatNumber number="${totalExpense}" format="#,##0.00" />
                                 </div>
-                            </div>
-                            <div class="col-2 align-self-end" style="color: red; background-color: #FFFFFF; border-radius: 5px; font-family: 'Inter', sans-serif;font-optical-sizing: auto;font-weight: 400;font-style: normal;">
-                                %
                             </div>
                         </div>
                     </div>

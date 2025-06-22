@@ -11,7 +11,18 @@
                 <div class="col-12">
                     <div class="row justify-content-around">
                         <div class="col-7">
-                            <div style="color: #343C6A;font-size: 40px;">Add Expense</div>
+                            <div class="row align-items-center">
+                                <div class="col-10" style="color: #343C6A;font-size: 40px;">Add Expense</div>
+                                <div class="col-2 text-end">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Dropdown
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                        <li><button class="dropdown-item" type="button">Action</button></li>
+                                        <li><button class="dropdown-item" type="button">Another action</button></li>
+                                    </ul>
+                                </div>
+                            </div>
                             <g:form controller="expense" action="save">
                                 <div class="row justify-content-between gy-5">
                                     <div class="col-6">

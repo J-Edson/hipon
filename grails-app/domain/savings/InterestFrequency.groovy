@@ -1,10 +1,10 @@
-package category
+package savings
 
-class Status {
+class InterestFrequency {
 
     Integer code
     String name
-    
+
     static constraints = {
     }
 
