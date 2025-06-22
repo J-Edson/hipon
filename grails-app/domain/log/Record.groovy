@@ -1,6 +1,7 @@
 package log
 
 import java.time.LocalDateTime
+import java.time.LocalDate
 import java.time.ZoneId
 
 import expense.Expense
@@ -18,6 +19,7 @@ class Record {
     RecordType recordType
     Status status
     Double txnAmt
+    LocalDate recordDate  = { -> LocalDate.now(ZoneId.of("Asia/Manila")) }()
     LocalDateTime logDate = { -> LocalDateTime.now(ZoneId.of("Asia/Manila")) }()
 
     static constraints = {

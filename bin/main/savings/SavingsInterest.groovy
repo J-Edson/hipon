@@ -1,6 +1,7 @@
 package savings
 
 import java.time.LocalDateTime
+import java.time.LocalDate
 import java.time.ZoneId
 
 class SavingsInterest {
@@ -9,7 +10,7 @@ class SavingsInterest {
     Double interestRate
     InterestFrequency interestFrequency
     LocalDateTime startDate = { -> LocalDateTime.now(ZoneId.of("Asia/Manila")) }()
-    LocalDateTime lastAccrualDate
+    LocalDate lastAccrualDate
 
 
     static constraints = {

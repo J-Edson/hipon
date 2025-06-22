@@ -5,6 +5,33 @@
         <title>Savings Expense Tracker</title>
     </head>
 <body>
+    <script>
+        function showAlertConfirm(formId,title,process){
+            console.log(formId)
+            console.log(title)
+            console.log(process)
+            if(process){
+                document.getElementById('process').value = process;
+            }
+            Swal.fire({
+            title: title,
+            showDenyButton: true,
+            confirmButtonText: "Confirm",
+            denyButtonText: `Cancel`
+            }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById(formId).submit();
+            } else if (result.isDenied) {
+                return false
+            }
+            });
+        }
+    </script>
+    <g:if test="${flash.message}">
+        <script>
+            showFlashMessage(`${flash.message}`)
+        </script>
+    </g:if>
     <div class="row">
         <div class="col-8 py-5" style="background-color: #F5F7FA;"> 
             <div class="row" >
@@ -61,24 +88,30 @@
             <div class="row mr-5">
                 <div class="col-12 mb-4 pb-3" style="border: 2px solid #C7EDF0;border-radius:10px; background-color: #FFFFFF">
                     <div style="color: #343C6A;font-size: 40px;">Adjust Balance</div>
-                    <g:form controller="savings" action="updateBalance">
+                    <form id="updateBalanceForm" action="${createLink(action: 'updateBalance')}">
                         <div class="row justify-content-around">
                             <div class="col-12 mb-2">
                                 <input class="form-input" id="txnAmt" name="txnAmt" type="number" step="0.01" min="0" placeholder="0.00" required/>
                             </div>
+                            <div class="col-12 mb-2">
+                                <input class="form-input" id="details" name="details" type="text" placeholder="Details..."/>
+                            </div>
                             <input type="hidden" name="id" value="${savingsInstance.id}" />
-                            <g:submitButton class="col-5" name="process" value="Add" style="background-color: #41D4A8; border: 2px solid #3B706D; border-radius: 10px; font-size: 20px !important;"/>
-                            <g:submitButton class="col-5" name="process" value="Deduct" style="background-color: #F02C07; border: 2px solid #3B706D; border-radius: 10px; color: white; font-size: 20px !important;"/>
+                            <input id="process" type="hidden" name="process" value="" />
                         </div>
-                    </g:form>
+                    </form>
+                    <div class="row justify-content-around">
+                        <button class="col-5" onclick="showAlertConfirm('updateBalanceForm','Adjust Balance?','Add')" style="background-color: #41D4A8; border: 2px solid #3B706D; border-radius: 10px; font-size: 20px !important;">Add</button>
+                        <button class="col-5" onclick="showAlertConfirm('updateBalanceForm','Adjust Balance?','Deduct')" style="background-color: #F02C07; border: 2px solid #3B706D; border-radius: 10px; color: white; font-size: 20px !important;">Deduct</button>
+                    </div>
                 </div>
                 <div class="col-12 mb-4 pb-3" style="border: 2px solid #C7EDF0;border-radius:10px; background-color: #FFFFFF">
                     <div style="color: #343C6A;font-size: 40px;">Send Balance</div>
-                    <g:form controller="savings" action="transferBalance">
+                    <form id="transferBalanceForm" action="${createLink(action: 'transferBalance')}">
                         <div class="row justify-content-center">
                             <div class="col-12 mb-2">
                                 <select id="debitSavingsID" name="debitSavingsID" class="form-select form-select-lg" aria-label="Default select example">
-                                <option selected>Select Savings Account</option>
+                                <option disabled selected>Select Savings Account</option>
                                 <g:each var="savings" in="${savingsActiveList}">
                                     <option value=${savings.id}>${savings.acctName}</option>
                                 </g:each>
@@ -87,16 +120,24 @@
                             <div class="col-12 mb-2">
                                 <input class="form-input" id="txnAmt" name="txnAmt" type="number" step="0.01" min="0" placeholder="0.00" required/>
                             </div>
+                            <div class="col-12 mb-2">
+                                <input class="form-input" id="details" name="details" type="text" placeholder="Details..."/>
+                            </div>
                             <input type="hidden" name="id" value="${savingsInstance.id}" />
-                            <g:submitButton class="col-5" name="Transfer" value="Transfer Balance" style="background-color: #41D4A8; border: 2px solid #3B706D; border-radius: 10px; font-size: 20px !important;"/>
                         </div>
-                    </g:form>
+                    </form>
+                    <div class="row justify-content-around">
+                        <button class="col-5" onclick="showAlertConfirm('transferBalanceForm','Transfer Balance?')" style="background-color: #41D4A8; border: 2px solid #3B706D; border-radius: 10px; font-size: 20px !important;">Transfer Balance</button>
+                    </div>
                 </div>
                 <div class="col-12 mb-4 pb-3" style="border: 2px solid #C7EDF0;border-radius:10px; background-color: #FFFFFF">
                     <div style="color: #343C6A;font-size: 40px;">Other Actions</div>
                     <div class="row justify-content-center">
                         <button type="button" class="btn col-10 mb-2 py-0" data-toggle="modal" data-target="#configureInterestModal" style="background-color: #41D4A8; border: 2px solid #3B706D; border-radius: 10px; font-size: 20px; color: black">Configure Interest</button>
-                        <button type="button" class="btn col-10 mb-2 py-0" style="background-color: #F02C07; border: 2px solid #3B706D; border-radius: 10px; font-size: 20px; color: white" onclick="window.location.href='${createLink(action: 'delete')}/${savingsInstance.id}'">Delete Account</button>
+                        <form id="deleteForm" style="display:none" action="${createLink(action: 'delete')}">
+                            <input type="hidden" name="id" value="${savingsInstance.id}" />
+                        </form>  
+                        <button type="button" class="btn col-10 mb-2 py-0" style="background-color: #F02C07; border: 2px solid #3B706D; border-radius: 10px; font-size: 20px; color: white" onclick="showAlertConfirm('deleteForm','Delete Account?','Add')">Delete Account</button>
                     </div>
 
                     <div class="modal fade" id="configureInterestModal" tabindex="-1" role="dialog" aria-labelledby="configureInterestModal" aria-hidden="true">
@@ -114,7 +155,7 @@
                                         <input type="hidden" name="id" value="${savingsInstance.id}" />
                                         <input class="form-input mb-3" id="intRate" name="intRate" type="number" step="0.01" min="0" value="${savingsInterestInstance.interestRate}" required/>
                                         <select id="frequencyID" name="frequencyID" class="form-select form-select-lg" aria-label="Default select example">
-                                        <option selected>Select Interest Frequency</option>
+                                        <option disabled selected>Select Interest Frequency</option>
                                         <g:each var="freq" in="${interestFreq}">
                                             <g:if test="${savingsInterestInstance.interestFrequency.id == freq.id}">
                                                 <option selected value=${freq.id}>${freq.name}</option>

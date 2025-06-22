@@ -49,7 +49,7 @@ class BootStrap {
 
     @Transactional
     void addInitialStatus() {
-        def statusTypeList = ["0-Active", "1-Closed", "2-Processed", "3-Reversed"]
+        def statusTypeList = ["1-Active", "2-Closed", "3-Processed", "4-Reversed"]
 
         statusTypeList.each { type ->
             String[] statusType = type.split("-");
@@ -64,7 +64,7 @@ class BootStrap {
 
     @Transactional
     void addInitialRecordType() {
-        def recordTypeList = ["0-New Savings", "1-Remove Savings", "2-Debit Balance", "3-Credit Balance", "4-Transfer Credit", "5-Transfer Debit", "6-Log Expense", "7-Reverse Expense"]
+        def recordTypeList = ["1-New Savings", "2-Remove Savings", "3-Debit Balance", "4-Credit Balance", "5-Transfer Credit", "6-Transfer Debit", "7-Log Expense", "8-Reverse Expense", "9-Savings Interest"]
 
         recordTypeList.each { type ->
             String[] recordType = type.split("-");
@@ -79,7 +79,7 @@ class BootStrap {
 
     @Transactional
     void addInitialExpenseCategory() {
-        def expenseCategoryList = ["0-Food", "1-Transportation", "2-Entertainment", "3-Utilities", "4-Personal Care", "5-Housing", "6-Healthcare", "7-Loans", "8-Insurance"]
+        def expenseCategoryList = ["1-Food", "2-Transportation", "3-Entertainment", "4-Utilities", "5-Personal Care", "6-Housing", "7-Healthcare", "8-Loans", "9-Insurance"]
 
         expenseCategoryList.each { category ->
             String[] expenseCategory = category.split("-");
@@ -94,7 +94,7 @@ class BootStrap {
 
     @Transactional
     void addInitialInterestFrequency() {
-        def frequencyList = ["0-N/A", "1-Daily", "2-Monthly", "3-Annually"]
+        def frequencyList = ["1-N/A", "2-Daily", "3-Monthly", "4-Annually"]
 
         frequencyList.each { freq ->
             String[] frequency = freq.split("-");

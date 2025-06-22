@@ -21,10 +21,17 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <!-- Swiper JS-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <!-- sweetalert2-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <g:layoutHead/>
 </head>
 
 <body>
+    <script>
+        function showFlashMessage(message){
+            Swal.fire(message);
+        }
+    </script>
     <%
     def currentUri = request.forwardURI
     %>
